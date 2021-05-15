@@ -1,11 +1,9 @@
-Add-Type -AssemblyName PresentationCore, PresentationFramework, WindowsBase, system.windows.forms
+Add-Type -AssemblyName PresentationFramework
 
 [xml]$Xaml = @"
 <Window
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     Name="Window"
     Title="Teams Helper"
     WindowStartupLocation="CenterScreen"
@@ -14,7 +12,7 @@ Add-Type -AssemblyName PresentationCore, PresentationFramework, WindowsBase, sys
     ShowInTaskbar="True">
     <Grid Name="Grid">
 
-        <Label Name="Label_Heading"/>
+        <Label Name="Label_Heading" Content="Re-Profile Microsoft Teams" Margin="0,25,0,0" FontSize="14" HorizontalContentAlignment="Center"/>
 
         <Button Name="Button_ReProfile" >
             <Button.Resources>
@@ -193,13 +191,9 @@ Function Invoke-TeamsReprofile {
 
 }
 
-$Label_Heading = $window.FindName("Label_Heading")
-$Label_Heading.Content = "Re-Profile Microsoft Teams"
-$Label_Heading.Margin = "0,25,0,0"
-$Label_Heading.FontSize = "14"
-$Label_Heading.HorizontalContentAlignment = "Center"
-
+# Use .FindName to locate the WPF element prior to styling
 $Button_ReProfile = $window.FindName("Button_ReProfile")
+
 $Button_ReProfile.Content = "C L I C K   M E"
 $Button_ReProfile.Margin = "40"
 $Button_ReProfile.VerticalAlignment = "Bottom"
@@ -216,7 +210,7 @@ $Button_ReProfile.ToolTip = "Click to Re-profile Teams"
 $Button_ReProfile.Add_MouseEnter( {
     
     $Window.Cursor = [System.Windows.Input.Cursors]::Hand
-        $Button_ReProfile.ForeGround = '#7eabfd'
+    $Button_ReProfile.ForeGround = '#7eabfd'
 
 })
 
@@ -230,6 +224,7 @@ $Button_ReProfile.Add_MouseLeave( {
 $Button_ReProfile.Add_Click( {
     
     Invoke-TeamsReprofile
+    $Window.Close()
 
 })
 
