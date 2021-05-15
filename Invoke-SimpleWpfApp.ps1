@@ -203,8 +203,6 @@ $Button_ReProfile.Background = "#7eabfd"
 $Button_ReProfile.BorderBrush = "White"
 $Button_ReProfile.Foreground = "White"
 $Button_ReProfile.Padding = "8"
-
-
 $Button_ReProfile.ToolTip = "Click to Re-profile Teams"
 
 $Button_ReProfile.Add_MouseEnter( {
