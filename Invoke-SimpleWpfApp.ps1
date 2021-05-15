@@ -25,8 +25,8 @@ Add-Type -AssemblyName PresentationFramework
     </Grid>
 </Window>
 "@
-$Reader = (New-Object System.Xml.XmlNodeReader $xaml)
-$Window = [Windows.Markup.XamlReader]::Load($reader)
+$Reader = (New-Object System.Xml.XmlNodeReader $Xaml)
+$Window = [Windows.Markup.XamlReader]::Load($Reader)
 
 Function Invoke-TeamsReprofile {
 
@@ -191,7 +191,7 @@ Function Invoke-TeamsReprofile {
 
 }
 
-# Use .FindName to locate the WPF element prior to styling
+# Use .FindName() to locate the WPF element prior to styling
 $Button_ReProfile = $window.FindName("Button_ReProfile")
 
 $Button_ReProfile.Content = "C L I C K   M E"
