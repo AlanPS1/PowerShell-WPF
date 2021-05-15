@@ -226,4 +226,4 @@ $Button_ReProfile.Add_Click( {
 
 })
 
-$window.ShowDialog() | Out-Null
+$Window.ShowDialog() | Out-Null
