@@ -1,4 +1,4 @@
-Add-Type -AssemblyName PresentationCore, PresentationFramework, WindowsBase, system.windows.forms
+Add-Type -AssemblyName PresentationFramework
 
 <# Set up the Runspace #>
 $Runspace = [runspacefactory]::CreateRunspace()
@@ -244,4 +244,4 @@ $Code = {
 
 $PSinstance            = [powershell]::Create().AddScript($Code)
 $PSinstance.Runspace   = $Runspace
-$Job                    = $PSinstance.BeginInvoke()
+$Job                   = $PSinstance.BeginInvoke()
