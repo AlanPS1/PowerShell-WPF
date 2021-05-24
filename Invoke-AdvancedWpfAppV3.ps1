@@ -492,8 +492,10 @@ $Code = {
         Start-Sleep -Seconds 2
         $SyncHash.TeamsProcessConstant = $false
         $SyncHash.Label_TeamsProcessConstant.Foreground = "Red"
+        $SyncHash.Label_TeamsProcessConstant.Content = "Teams Running: $false"
         $SyncHash.OutlookProcessConstant = $false
         $SyncHash.Label_OutlookProcessConstant.Foreground = "Red"
+        $SyncHash.Label_OutlookProcessConstant.Content = "Teams Running: $false"
         Start-Sleep -Seconds 5
         Invoke-TeamsReProfile
 
