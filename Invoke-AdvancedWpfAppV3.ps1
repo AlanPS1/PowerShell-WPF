@@ -157,6 +157,7 @@ $Code = {
 
     # Capture logged on user's username
     $SyncHash.LoggedOnUser = (Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object UserName).UserName.Split('\')[1]
+    $SyncHash.LoggedOnUser = 'Alan' #Test only
 
     # Construct the logged on user's equivelant to $Home variable
     $SyncHash.LoggedOnUserHome = "$($Home.Split($($SyncHash.LoggedOnUser))[0])$($SyncHash.LoggedOnUser)"
@@ -258,8 +259,18 @@ $Code = {
         # Look here to check the current value of !$SyncHash.OutlookTester - advanced function params
 
         # Restart Outlook
-    
-        $SyncHash.OutlookExe = Get-ChildItem -Path 'C:\Program Files (x86)\Microsoft Office\root\Office16' -Filter Outlook.exe -Recurse -ErrorAction SilentlyContinue -Force | Where-Object { $_.Directory -notlike "*Updates*" } | Select-Object Name, Directory
+
+        # Restart Outlook
+        $SyncHash.OutlookExe = Get-ChildItem -Path 'C:\Program Files\Microsoft Office\root\Office16' -Filter Outlook.exe -Recurse -ErrorAction SilentlyContinue -Force | 
+        Where-Object { $_.Directory -notlike "*Updates*" } | 
+        Select-Object Name, Directory
+
+        If (!$SyncHash.OutlookExe) {
+
+            $SyncHash.OutlookExe = Get-ChildItem -Path 'C:\Program Files (x86)\Microsoft Office\root\Office16' -Filter Outlook.exe -Recurse -ErrorAction SilentlyContinue -Force | 
+            Where-Object { $_.Directory -notlike "*Updates*" } | 
+            Select-Object Name, Directory
+        }
 
         Start-Process -File "$($SyncHash.OutlookExe.Directory)\$($SyncHash.OutlookExe.Name)"
 
@@ -488,9 +499,14 @@ $Code = {
         
         Invoke-TeamsKill
         Invoke-OutlookKill
+        Start-Sleep -Seconds 2
+        $SyncHash.TeamsProcessConstant = $false
+        $SyncHash.Label_TeamsProcessConstant.Foreground = "Red"
+        $SyncHash.OutlookProcessConstant = $false
+        $SyncHash.Label_OutlookProcessConstant.Foreground = "Red"
         Start-Sleep -Seconds 5
         Invoke-TeamsReProfile
-        
+
         Invoke-TeamsStart
         Invoke-OutlookStart
 
