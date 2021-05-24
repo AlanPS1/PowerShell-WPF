@@ -256,10 +256,6 @@ $Code = {
 
     Function Invoke-OutlookStart {
 
-        # Look here to check the current value of !$SyncHash.OutlookTester - advanced function params
-
-        # Restart Outlook
-
         # Restart Outlook
         $SyncHash.OutlookExe = Get-ChildItem -Path 'C:\Program Files\Microsoft Office\root\Office16' -Filter Outlook.exe -Recurse -ErrorAction SilentlyContinue -Force | 
         Where-Object { $_.Directory -notlike "*Updates*" } | 
@@ -303,12 +299,6 @@ $Code = {
         Param (
 
         )
-
-        # $Input = $PSBoundParameters
-
-        # Look here for fix to go red on drop
-        # Consider passing the false value (param) into this function as an advanced function
-        # Create custom object in Button_TeamsReProfile to hand off to this function
 
         PROCESS {
 
